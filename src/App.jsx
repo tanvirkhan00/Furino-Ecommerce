@@ -6,6 +6,7 @@ import Blog from "./Pages/Blog";
 import Contact from "./Pages/Contact";
 import SingleProduct from "./Pages/SingleProduct";
 import Cart from "./Pages/Cart";
+import CheckOut from "./Pages/CheckOut";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/shop/:id" element={<SingleProduct />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/checkOut" element={<CheckOut />} />
     </Route>
   ))
 
