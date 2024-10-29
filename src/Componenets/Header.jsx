@@ -118,7 +118,7 @@ const Header = () => {
                         <div className='flex items-center justify-between'>
                             <a className='border-2 border-black rounded-2xl px-[20px] py-[5px]' href="#"><Link to="/Cart">Cart</Link></a>
                             <Link to="/checkOut"><a className='border-2 border-black rounded-2xl px-[10px] py-[5px]'>Checkout</a></Link>
-                            <Link to="/ProductComparison"><a className='border-2 border-black rounded-2xl px-[10px] py-[5px]' href="#">Comparison</a></Link>
+                            <Link to="/comparison"><a className='border-2 border-black rounded-2xl px-[10px] py-[5px]' href="#">Comparison</a></Link>
                         </div>
                     </div>
                 }
