@@ -2,6 +2,7 @@ import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } 
 import RootLayout from "./Componenets/RootLayout/RootLayout"
 import Home from "./Pages/Home"
 import Shop from "./Pages/Shop"
+import Blog from "./Pages/Blog";
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
     <Route element={<RootLayout />} >
       <Route path="/" element={<Home />} />
       <Route path="/shop" element={<Shop />} />
+      <Route path="/blog" element={<Blog />} />
     </Route>
   ))
 
