@@ -3,6 +3,7 @@ import RootLayout from "./Componenets/RootLayout/RootLayout"
 import Home from "./Pages/Home"
 import Shop from "./Pages/Shop"
 import Blog from "./Pages/Blog";
+import Contact from "./Pages/Contact";
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/shop" element={<Shop />} />
       <Route path="/blog" element={<Blog />} />
+      <Route path="/contact" element={<Contact />} />
     </Route>
   ))
 
