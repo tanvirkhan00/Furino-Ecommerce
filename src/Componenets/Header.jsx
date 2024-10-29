@@ -49,6 +49,11 @@ const Header = () => {
         }
     }
 
+    // Cart
+    let filterCart = data.filter((item) => item.id >= 20 == item.id <= 21)
+
+
+
 
     let handleToDetails = (id) => {
         navigate(`/shop/${id}`)
@@ -75,13 +80,13 @@ const Header = () => {
                 <a href="#"><VscAccount /></a>
                 <input onChange={handleSearch} value={inputValue} type="search" placeholder='Sarch product' className='border-[1px] border-[#000] bg-slate-200 outline-none rounded-lg pl-5 py-1 text-[#000] text-[15px]' />
                 {searchItem.length > 0 &&
-                    <div className="absolute top-12 left-0 w-[350px] h-[100vh] bg-white overflow-y-scroll flex flex-col gap-3 p-2">
+                    <div className="absolute top-12 left-0 w-[350px] h-[600px] bg-white overflow-y-scroll flex flex-col gap-4 p-2 border-[1px] border-[#000]">
                         {searchItem.map((item) => (
-                            <div onClick={()=>handleToDetails(item.id)} className="flex items-center gap-2 bg-slate-200 p-2">
-                                <img className='w-24 h-24' src={item.thumbnail} alt="" />
-                                <div>
+                            <div onClick={() => handleToDetails(item.id)} className="flex items-center gap-2 p-2 shadow-sm shadow-black">
+                                <img className='h-[60px]' src={item.thumbnail} alt="" />
+                                <div className='text-[16px]'>
                                     <h2 className='font-semibold'>{item.title}</h2>
-                                    <h4 className='text-yellow-500'>{item.price}$</h4>
+                                    <h4 className='text-red-500'>$ {item.price}</h4>
                                 </div>
                             </div>
                         ))}
@@ -90,27 +95,21 @@ const Header = () => {
                 <a href="#"><CiHeart /></a>
                 <a ref={carteRef}><FaCartPlus /></a>
                 {cartShow &&
-                    <div className="shoppingCart flex flex-col gap-[30px] bg-white w-[400px] z-10 right-0 top-0 h-[100vh] px-[30px] absolute">
+                    <div className="shoppingCart flex flex-col gap-[30px] bg-white w-[400px] z-10 right-0 top-0 h-[100vh] px-[30px] py-2 absolute border-[1px] border-black">
                         <div className="heading flex justify-between items-center border-b-2 border-slate-500 pb-[30px]">
                             <h1 className='text-[25px] font-bold'>Shopping Cart</h1>
                             <a href="#"><BsCartXFill /></a>
                         </div>
-                        <div className="img-box flex justify-between items-center text-center">
-                            <img src={cartImg} alt="" />
-                            <div>
-                                <h1 className='font-semibold text-[20px]'>Asgaard sofa</h1>
-                                <p>1 * <span className='text-orange-600'>Rs. 250,000.00</span></p>
+                        {filterCart.map((item) => (
+                            <div className="img-box flex justify-between items-center text-center shadow-sm shadow-black p-2">
+                                <img src={item.thumbnail} alt="" className='h-[60px]' />
+                                <div className='text-[16px]'>
+                                    <h1 className='font-semibold text-[20px]'>{item.title}</h1>
+                                    <p>1 * <span className='text-orange-600'>Rs. {item.price}$</span></p>
+                                </div>
+                                <a href="#"><IoIosCloseCircleOutline /></a>
                             </div>
-                            <a href="#"><IoIosCloseCircleOutline /></a>
-                        </div>
-                        <div className="img-box flex justify-between items-center text-center">
-                            <img src={cartImg1} alt="" />
-                            <div>
-                                <h1 className='font-semibold text-[20px]'>Casaliving Wood</h1>
-                                <p>1 * <span className='text-orange-600'>Rs. 270,000.00</span></p>
-                            </div>
-                            <a href="#"><IoIosCloseCircleOutline /></a>
-                        </div>
+                        ))}
                         <div className="total flex  items-center gap-[100px] border-b-2 border-slate-500 pb-[30px]">
                             <p>Subtotal</p>
                             <p className='text-orange-500'>Rs. 520,000.00</p>
