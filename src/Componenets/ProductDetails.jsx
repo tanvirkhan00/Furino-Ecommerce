@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { apiData } from './ContextApi';
 
 // React Icon
 import { FaStar } from "react-icons/fa";
-import { apiData } from './ContextApi';
 import RelatedProductsSection from './RelatedProductsSection';
 
 
@@ -33,9 +33,6 @@ const ProductDetails = () => {
                 <div className="container">
                     <div className="img-content flex justify-between gap-[30px]">
                         <div className="flex items-center justify-center basis-[50%] h-[500px]">
-                            {/* {info?.images?.map((item)=>(
-                            <img src={item} alt="" className='w-[35%]'/>
-                        ))} */}
                             <img src={info.thumbnail} alt="" />
                         </div>
                         <div className="content basis-[50%] flex flex-col gap-[10px]">

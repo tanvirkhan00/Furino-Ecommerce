@@ -8,6 +8,7 @@ import SingleProduct from "./Pages/SingleProduct";
 import Cart from "./Pages/Cart";
 import CheckOut from "./Pages/CheckOut";
 import ProductComparison from "./Pages/ProductComparison";
+import WishList from "./Pages/WishList";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkOut" element={<CheckOut />} />
       <Route path="/comparison" element={<ProductComparison />} />
+      <Route path="/wishList" element={<WishList/>} />
     </Route>
   ))
 

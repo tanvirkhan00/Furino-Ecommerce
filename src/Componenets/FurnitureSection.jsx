@@ -7,7 +7,7 @@ const FurnitureSection = () => {
     return (
         <>
 
-            <section className="furniture mt-[50px] px-[50px] mx-auto">
+            <section className="mt-[50px]">
                 <div className="container">
                     <div className="heading text-center">
                         <h3 className='text-zinc-600 font-bold'>Share your setup with</h3>
