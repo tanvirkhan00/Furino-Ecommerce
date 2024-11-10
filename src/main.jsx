@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { ContextApi } from './Componenets/ContextApi.jsx';
 import { Provider } from 'react-redux';
 import Store from './Store.js';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 createRoot(document.getElementById('root')).render(

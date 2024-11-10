@@ -6,7 +6,7 @@ const HeroSection = () => {
             <section className="bg-HeroImage h-[600px]">
                 <div className="container mt-[150px]">
                     <div className='flex justify-end items-end h-[500px]'>
-                        <div className="bg-red-200 flex flex-col w-[300px] md:w-[400px] text-start p-[20px] bottom-0">
+                        <div className="bg-red-200 flex flex-col w-[300px] md:w-[400px] text-start p-[20px] lg:p-[60px] bottom-0">
                             <h3 className='text-black font-semibold'>New Arriavl</h3>
                             <h1 className='text-orange-400 text-[20px] font-bold'>Discover Our New Collection</h1>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis.</p>

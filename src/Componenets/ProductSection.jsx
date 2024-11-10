@@ -25,9 +25,9 @@ const ProductSection = () => {
                     <h1 className='font-bold text-[30px] text-center'>Our Product</h1>
                     <div className="flex flex-wrap gap-[20px]">
                         {filteredProduct.map((item) => (
-                            <div className="single-box relative text-start basis-[47%] md:basis-[31%]">
+                            <div className="single-box relative text-start basis-[47%] md:basis-[31%] lg:basis-[23%]">
                                 <div className='relative group'>
-                                    <Link to={`/Shop/${item.id}`}><img src={item.thumbnail} alt="" className='h-[180px] w-full bg-green-400 relative' /></Link>
+                                    <Link to={`/Shop/${item.id}`}><img src={item.thumbnail} alt="" className='h-[180px] lg:h-[230px] w-full bg-green-400 relative' /></Link>
                                     <button onClick={() => gggg(item)} className='bg-black text-white w-full bg-opacity-80 py-2 bottom-0 opacity-0 duration-500  ease-in-out   group-hover:opacity-100 absolute'>Add To Cart</button>
                                 </div>
                                 <div className="content mt-2">
