@@ -29,9 +29,9 @@ const ProductDetails = () => {
 
     return (
         <>
-            <section className='px-[50px] mx-auto mt-[50px]'>
+            <section className='mt-[150px]'>
                 <div className="container">
-                    <div className="img-content flex justify-between gap-[30px]">
+                    <div className="items-center flex justify-between gap-[30px]">
                         <div className="flex items-center justify-center basis-[50%] h-[500px]">
                             <img src={info.thumbnail} alt="" />
                         </div>
@@ -64,7 +64,7 @@ const ProductDetails = () => {
                                     <p className='bg-orange-500 w-[40px] rounded-full h-[40px]'></p>
                                 </div>
                             </div>
-                            <div className="button flex gap-4 items-center mt-3 border-b-2 border-slate-400 pb-[50px]">
+                            <div className="button flex gap-4 items-center mt-3 border-b-2 border-slate-400 pb-[20px]">
                                 <input type="number" placeholder='1' className='w-[150px] px-[20px] py-[15px] border-2 border-slate-400 rounded-md ' />
                                 <button className='w-[200px] border-slate-500 border-2 py-[15px] rounded-md'>
                                     Add To Cart

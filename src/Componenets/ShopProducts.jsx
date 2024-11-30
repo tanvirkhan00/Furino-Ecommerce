@@ -15,7 +15,8 @@ const ShopProducts = () => {
 
     let info = useContext(apiData)
     let dispatch = useDispatch()
-    let [category, setCategory] = useState()
+    let [category, setCategory] = useState([])
+    let [categoryItem, setCategoryItem] = useState([])
 
     // Add Cart
     let handleToCart = (item) => {
@@ -26,7 +27,16 @@ const ShopProducts = () => {
     // Filter Category
     useEffect(() => {
         setCategory([... new Set(info.map((item) => item.category))])
-    })
+    }, [info])
+
+    // Filter Category wise Items
+    let handleCategoryFilter = (categoryId) => {
+        let filterCategory = info.filter((item) => item.category == categoryId)
+        setCategoryItem(filterCategory)
+    }
+
+
+
 
     // category visibility
 
@@ -58,7 +68,7 @@ const ShopProducts = () => {
     }
 
     let handlePrev = () => {
-        if (currentPage >1) {
+        if (currentPage > 1) {
             setCurrentPage(currentPage - 1)
         }
     }
@@ -66,6 +76,12 @@ const ShopProducts = () => {
         if (currentPage !== pageNumber) {
             setCurrentPage(currentPage + 1)
         }
+    }
+
+    let handleShowByNumber = (e) => {
+        let inputValue = Number(e.target.value) || 15
+        setPerPage(inputValue)
+        setCurrentPage(1)
     }
 
 
@@ -76,7 +92,7 @@ const ShopProducts = () => {
 
     return (
         <>
-            <section className="">
+            <section>
                 <div className='bg-yellow-100 px-10'>
                     <div className="container flex items-center justify-between h-[100px]">
                         <div className="leftBox flex items-center gap-[30px] relative">
@@ -87,24 +103,26 @@ const ShopProducts = () => {
                                 <img src={shopIcon3} alt="" />
                             </div>
                             <div className="singleBox">
-                                <p>Showing {firstIndexItem +1} to {lastIndexItem} of {currentItems.length} results</p>
+                                <p>Showing {firstIndexItem + 1} to {lastIndexItem} of {currentItems.length} results</p>
                             </div>
-                            <div className='absolute top-5'>
+                            <div className='absolute top-5 z-10 '>
                                 {isCategoryVisible && (
-                                    category?.map((item) => (
-                                        <div>
-                                            <ul className='flex items-center'>
-                                                <li>{item}</li>
+                                    <div className='h-[300px] overflow-y-scroll'>
+                                        {category?.map((item) => (
+                                        <div >
+                                            <ul className='flex gap-3'>
+                                                <li onClick={() => handleCategoryFilter(item)} className='cursor-pointer capitalize'>{item}</li>
                                             </ul>
                                         </div>
-                                    ))
+                                        ))}
+                                    </div>
                                 )}
                             </div>
                         </div>
                         <div className="rightBox flex items-center gap-[20px]">
                             <div className="singleBox flex items-center gap-[10px]">
                                 <p>Show</p>
-                                <textarea className='w-[55px] h-[55px] text-center py-[15px] text-black' name="number" id="" placeholder='7'></textarea>
+                                <input onChange={handleShowByNumber} className='w-[55px] h-[55px] text-center py-[15px] text-black' type="text" />
                             </div>
                             <div className="singleBox flex items-center gap-[10px]">
                                 <p>Short by</p>
@@ -116,49 +134,69 @@ const ShopProducts = () => {
                 <div className="container mt-[50px]">
                     <div className=' flex flex-col gap-[30px]'>
                         <h1 className='font-bold text-[48px] text-center'>Our Product</h1>
-                        <div className="flex flex-wrap gap-[30px]">
-                            {currentItems.map((item) => (
-                                <div className="single-box relative text-start lg:basis-[23%]">
-                                    <div className='relative group'>
-                                        <Link to={`/Shop/${item.id}`}><img src={item.thumbnail} alt="" className='h-[250px] w-full bg-green-400 relative' /></Link>
-                                        <button onClick={() => handleToCart(item)} className='bg-black text-white w-full bg-opacity-80 py-2 bottom-0 opacity-0 duration-500  ease-in-out   group-hover:opacity-100 absolute'>Add To Cart</button>
-                                        <ToastContainer
-                                            position="top-right"
-                                            autoClose={1000}
-                                            hideProgressBar={false}
-                                            newestOnTop={false}
-                                            closeOnClick
-                                            rtl={false}
-                                            pauseOnFocusLoss
-                                            draggable
-                                            pauseOnHover
-                                            theme="light"
-                                        />
+                        {categoryItem.length > 0 ?
+                            <div className="flex flex-wrap gap-[30px]">
+                                {categoryItem.map((item) => (
+                                    <div className="single-box relative text-start lg:basis-[23%]">
+                                        <div className='relative group'>
+                                            <Link to={`/Shop/${item.id}`}><img src={item.thumbnail} alt="" className='h-[250px] w-full bg-green-400 relative' /></Link>
+                                            <button onClick={() => handleToCart(item)} className='bg-black text-white w-full bg-opacity-80 py-2 bottom-0 opacity-0 duration-500  ease-in-out   group-hover:opacity-100 absolute'>Add To Cart</button>
+                                        </div>
+                                        <div className="content mt-2">
+                                            <h1 className='text-[20px] font-semibold w-[200px] truncate'>{item.title}</h1>
+                                            <p className='text-[20px] font-semibold text-red-600'>Rs.   {item.price}$</p>
+                                        </div>
+                                        <div className="mark absolute bg-red-500 text-[12px] rounded-full w-[48px] h-[48px] flex items-center justify-center right-[20px] top-[20px] text-white">
+                                            <p>{item.discountPercentage}%</p>
+                                        </div>
                                     </div>
-                                    <div className="content mt-2">
-                                        <h1 className='text-[20px] font-semibold w-[200px] truncate'>{item.title}</h1>
-                                        <p className='text-[20px] font-semibold text-red-600'>Rs.   {item.price}$</p>
+                                ))}
+                            </div>
+                            :
+                            <div className="flex flex-wrap gap-[30px]">
+                                {currentItems.map((item) => (
+                                    <div className="single-box relative text-start lg:basis-[23%]">
+                                        <div className='relative group'>
+                                            <Link to={`/Shop/${item.id}`}><img src={item.thumbnail} alt="" className='h-[250px] w-full bg-green-400 relative' /></Link>
+                                            <button onClick={() => handleToCart(item)} className='bg-black text-white w-full bg-opacity-80 py-2 bottom-0 opacity-0 duration-500  ease-in-out   group-hover:opacity-100 absolute'>Add To Cart</button>
+                                        </div>
+                                        <div className="content mt-2">
+                                            <h1 className='text-[20px] font-semibold w-[200px] truncate'>{item.title}</h1>
+                                            <p className='text-[20px] font-semibold text-red-600'>Rs.   {item.price}$</p>
+                                        </div>
+                                        <div className="mark absolute bg-red-500 text-[12px] rounded-full w-[48px] h-[48px] flex items-center justify-center right-[20px] top-[20px] text-white">
+                                            <p>{item.discountPercentage}%</p>
+                                        </div>
                                     </div>
-                                    <div className="mark absolute bg-red-500 text-[12px] rounded-full w-[48px] h-[48px] flex items-center justify-center right-[20px] top-[20px] text-white">
-                                        <p>{item.discountPercentage}%</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                        }
                         <div className='flex justify-center items-center mt-10 gap-5 text-[20px] flex-wrap'>
                             <p className='border-2 border-red-500 px-3 py-1 rounded-md cursor-pointer' onClick={handlePrev}>Prev</p>
                             {pageNumbers.map((item) => (
                                 <div className='w-[40px] h-[40px] border-2 border-black rounded-full flex items-center justify-center duration-500 ease-in-out cursor-pointer hover:-translate-y-1 hover:bg-green-500'>
                                     <span onClick={() => handlePage(item)}>
-                                     <h4 className={` ${item=== currentPage ?"text-red-500" : ""}`}>
-                                        {item}
-                                     </h4>
+                                        <h4 className={` ${item === currentPage ? "text-red-500" : ""}`}>
+                                            {item}
+                                        </h4>
                                     </span>
                                 </div>
                             ))}
                             <p className='border-2 border-red-500 px-3 py-1 rounded-md cursor-pointer' onClick={handleNext}>Next</p>
                         </div>
                     </div>
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={1000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                    />
                 </div>
             </section>
 
